@@ -2,8 +2,25 @@ TEMPLATE = app
 TARGET =
 VERSION = 0.6.3
 INCLUDEPATH += src src/json src/qt
-DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE USE_IPV6
+#DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE USE_IPV6
+DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE BOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN __NO_SYSTEM_INCLUDES
 CONFIG += no_include_pwd
+#CONFIG += thread
+
+#Uncomment following 2 lines to make static wallet
+#CONFIG += static
+#win32:QMAKE_LFLAGS *= -Wl,--large-address-aware -static
+
+
+BOOST_INCLUDE_PATH=C:\deps\boost_1_55_0
+BOOST_LIB_PATH=C:\deps\boost_1_55_0\stage\lib
+BDB_INCLUDE_PATH=C:\deps\db-4.7.25.NC\build_unix
+BDB_LIB_PATH=C:\deps\db-4.7.25.NC\build_unix
+OPENSSL_INCLUDE_PATH=C:\deps\openssl-1.0.1j\include
+OPENSSL_LIB_PATH=C:\deps\openssl-1.0.1j
+MINIUPNPC_LIB_SUFFIX=-miniupnpc
+MINIUPNPC_INCLUDE_PATH=C:\deps
+MINIUPNPC_LIB_PATH=C:\deps\miniupnpc
 
 # for boost 1.37, add -mt to the boost libraries
 # use: qmake BOOST_LIB_SUFFIX=-mt
@@ -288,7 +305,7 @@ OTHER_FILES += \
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
     macx:BOOST_LIB_SUFFIX = -mt
-    windows:BOOST_LIB_SUFFIX = -mgw44-mt-s-1_53
+    windows:BOOST_LIB_SUFFIX = -mgw46-mt-s-1_55
 }
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
@@ -315,8 +332,11 @@ isEmpty(BOOST_INCLUDE_PATH) {
     macx:BOOST_INCLUDE_PATH = /opt/local/include
 }
 
+
 windows:LIBS += -lshlwapi
 windows:DEFINES += WIN32
+win32:DEFINES += WIN32
+win32:LIBS += -lshlwapi
 windows:RC_FILE = src/qt/res/bitcoin-qt.rc
 
 windows:!contains(MINGW_THREAD_BUGFIX, 0) {
