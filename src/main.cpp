@@ -31,7 +31,8 @@ unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
 //uint256 hashGenesisBlock("0x0a59605118489aa9cde58e64210d3d56e246758fbabcd1482e54bf4032545221");
-uint256 hashGenesisBlock("0xeda0f694a7fd324a473226dbf89fbde26b5a1aa142910b6ad762ef1e9b9a85de");
+//uint256 hashGenesisBlock("0xeda0f694a7fd324a473226dbf89fbde26b5a1aa142910b6ad762ef1e9b9a85de");
+uint256 hashGenesisBlock("0xaa7f7ab25a3facbf30a7d96eb2fe99f953660b6864e10096a6adfebd9ecdae59");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Credits: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2154,7 +2155,7 @@ bool LoadBlockIndex(bool fAllowNew)
     
         
         // Genesis block
-        const char* pszTimestamp = "February  26, 2014, Wall Street Journal, Bitcoin's Mt. Gox: At Look at the Man in Charge";
+        const char* pszTimestamp = "May 16, 2016, TechCrunch, Blockchain open sources Thunder Network";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2166,9 +2167,9 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1393443453;
+        block.nTime    = 1463532237;
         block.nBits    = 0x1e0fffff;
-        block.nNonce   = 1218522;
+        block.nNonce   = 2216270;
 
         if (fTestNet)
         {
@@ -2181,7 +2182,8 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
 
-        assert(block.hashMerkleRoot == uint256("0x1a322ec013481b9320ee69f006e732da5ce43ad58b6e186fbb2583adfcdb8967"));
+        //assert(block.hashMerkleRoot == uint256("0x1a322ec013481b9320ee69f006e732da5ce43ad58b6e186fbb2583adfcdb8967"));
+	assert(block.hashMerkleRoot == uint256("3afc206b549f6d6aeaedaf198c781ff02cbdf2a58a1c44d1a1faa91a5ef66472"));
 
         // If genesis block hash does not match, then generate new genesis hash.
         if (true && block.GetHash() != hashGenesisBlock)
@@ -2212,6 +2214,7 @@ bool LoadBlockIndex(bool fAllowNew)
             printf("block.nTime = %u \n", block.nTime);
             printf("block.nNonce = %u \n", block.nNonce);
             printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
+		printf("block.hashmerkleroot = %s\n", block.hashMerkleRoot.ToString().c_str());
         }
 
         block.print();
@@ -2527,7 +2530,7 @@ bool static AlreadyHave(CTxDB& txdb, const CInv& inv)
 // The message start string is designed to be unlikely to occur in normal data.
 // The characters are rarely used upper ascii, not valid as UTF-8, and produce
 // a large 4-byte int at any alignment.
-unsigned char pchMessageStart[4] = { 0xde, 0xb5, 0xa3, 0xba };
+unsigned char pchMessageStart[4] = { 0x8e, 0x95, 0x1f, 0x77 };
 
 
 bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)

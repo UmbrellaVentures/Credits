@@ -301,8 +301,8 @@ void ThreadIRCSeed2(void* parg)
             // randomly join #Credits00-#Credits99
             int channel_number = GetRandInt(100);
             channel_number = 0; // Credits: for now, just use one channel
-            Send(hSocket, strprintf("JOIN #CryptoCredits%02d\r", channel_number).c_str());
-            Send(hSocket, strprintf("WHO #Cryptocredits%02d\r", channel_number).c_str());
+            Send(hSocket, strprintf("JOIN #CryptoCredits2%02d\r", channel_number).c_str());
+            Send(hSocket, strprintf("WHO #Cryptocredits2%02d\r", channel_number).c_str());
         }
 
         int64 nStart = GetTime();

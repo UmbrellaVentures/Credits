@@ -977,6 +977,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Windows >= Vista: C:\Users\Username\AppData\Roaming\Credits
     // Mac: ~/Library/Application Support/Credits
     // Unix: ~/.Credits
+
 #ifdef WIN32
     // Windows
     return GetSpecialFolderPath(CSIDL_APPDATA) / "Credits";
@@ -1067,6 +1068,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 
 boost::filesystem::path GetPidFile()
 {
+	//return 0;
     boost::filesystem::path pathPidFile(GetArg("-pid", "Creditsd.pid"));
     if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
     return pathPidFile;
@@ -1074,6 +1076,7 @@ boost::filesystem::path GetPidFile()
 
 void CreatePidFile(const boost::filesystem::path &path, pid_t pid)
 {
+	//return;
     FILE* file = fopen(path.string().c_str(), "w");
     if (file)
     {
